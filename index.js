@@ -6,7 +6,8 @@ const mconn = require('express-myconnection');
 
 const app = express();
 
-const ClienteRoute = require('./routes/cliente')
+const CustomerRoute = require('./routes/customer');
+const { urlencoded } = require('express');
 
 
 app.set('port', process.env.PORT || 3000);
@@ -22,8 +23,9 @@ app.use(mconn(mysql,{
     port:3306,
     database:'tickets'
 },'single'))
+app.use(urlencoded({extended: false}));
 
-app.use('/',ClienteRoute);
+app.use('/',CustomerRoute);
 
 
 app.use(express.static(path.join(__dirname,'public')));

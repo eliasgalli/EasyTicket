@@ -1,0 +1,46 @@
+<%- include ('partials/header') %> 
+<h1>Customers</h1>
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-7">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>number</th>
+                        <th>description</th>
+                        <th>actions</th>
+                    </tr>
+                    <pre><% data %> </pre>
+                    <tr></tr>
+                </thead>
+                <tbody>
+                    <% if(data) { %>
+                        <% for (var i = 0; i < data.length; i++) { %> 
+                            <tr>
+                                <td><%= data[i].id  %> </td>
+                                <td><%= data[i].description  %> </td>
+                                <td><a href="/delete/<%= data[i].id  %> " class="btn btn-danger">Delete</a> </td>
+                            </tr>
+                            <% }  %>        
+                    <% }  %> 
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-5">      
+          <div class="card">
+              <div class="card-body">
+                <form action="/add" method="POST">
+                    <div class="<div class="form-group">
+                        <label for=""></label>
+                        <input type="text" name="description" id="" class="form-control" placeholder="description" aria-describedby="helpId">
+                    </div>
+                    <button type="submit" class="btn btn-primary" >Save</button>
+                </form>
+              </div>
+          </div>
+        </div>
+    </div>    
+</div>
+
+<%- include ('partials/footer') %> 
