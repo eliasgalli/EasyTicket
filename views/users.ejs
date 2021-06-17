@@ -23,7 +23,10 @@
                                 <td><%= data[i].last_name  %> </td>
                                 <td><%= data[i].first_name  %> </td>
                                 <td><%= data[i].email  %> </td>
-                                <td><a href="users/delete/<%= data[i].id  %> " class="btn btn-danger">Delete</a> </td>
+                                <td>
+                                    <a href="/users/delete/<%= data[i].id  %> " class="btn btn-danger">Delete</a> 
+                                    <a href="/users/<%= data[i].id  %> " class="btn btn-info">Edit</a> 
+                                </td>
                             </tr>
                             <% }  %>        
                     <% }  %> 
@@ -35,10 +38,10 @@
               <div class="card-body">
                 <form action="/users/add" method="POST">
                     <div class="form-group">
-                        <input type="text" name="last_name" id="" class="form-control" placeholder="Last Name" aria-describedby="helpId">
-                        <input type="text" name="first_name" id="" class="form-control" placeholder="First Name" aria-describedby="helpId">
-                        <input type="text" name="email" id="" class="form-control" placeholder="Email" aria-describedby="helpId">
-                        <input type="text" name="password" id="" class="form-control" placeholder="Password" aria-describedby="helpId">
+                        <input type="text" name="last_name" id="" class="form-control" placeholder="Last Name" aria-describedby="helpId" value= <%= obj ? obj.last_name : '' %>>
+                        <input type="text" name="first_name" id="" class="form-control" placeholder="First Name" aria-describedby="helpId"value= <%= obj ? obj.first_name : '' %>>
+                        <input type="text" name="email" id="" class="form-control" placeholder="Email" aria-describedby="helpId" value= <%= obj ? obj.email : '' %>>
+                        <input type="text" name="password" id="" class="form-control" placeholder="Password" aria-describedby="helpId" value= <%= obj ? obj.password : '' %>>
                     </div>
                     <button type="submit" class="btn btn-primary" >Save</button>
                 </form>

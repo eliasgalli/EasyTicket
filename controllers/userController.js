@@ -4,8 +4,11 @@ controller.list = (req,res) => {
     req.getConnection((err,conn) => {
         conn.query('SELECT * FROM USERS',(err,usersLST)=> {
             if (err) { res.json(err);}
+            const obj = usersLST.find(x => x.id === parseInt(req.params.id));
+            console.log(obj)
             res.render('users',{
-                data: usersLST
+                data: usersLST,
+                obj: obj
             })
         })
     });
