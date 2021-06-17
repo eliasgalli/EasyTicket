@@ -8,6 +8,7 @@ const app = express();
 
 const customersRoute = require('./routes/customerRouter');
 const usersRoute = require('./routes/userRouter');
+const usersRolesRoute = require('./routes/userRolesRouter');
 const { urlencoded } = require('express');
 
 
@@ -29,6 +30,8 @@ app.use(urlencoded({extended: false}));
 app.use('/',customersRoute);
 app.use('/customers',customersRoute);
 app.use('/users',usersRoute);
+app.use('/usersroles',usersRolesRoute);
+
 
 
 app.use(express.static(path.join(__dirname,'public')));
