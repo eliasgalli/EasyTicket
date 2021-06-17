@@ -6,7 +6,8 @@ const mconn = require('express-myconnection');
 
 const app = express();
 
-const CustomerRoute = require('./routes/customer');
+const customersRoute = require('./routes/customerRouter');
+const usersRoute = require('./routes/userRouter');
 const { urlencoded } = require('express');
 
 
@@ -25,7 +26,9 @@ app.use(mconn(mysql,{
 },'single'))
 app.use(urlencoded({extended: false}));
 
-app.use('/',CustomerRoute);
+app.use('/',customersRoute);
+app.use('/customers',customersRoute);
+app.use('/users',usersRoute);
 
 
 app.use(express.static(path.join(__dirname,'public')));
