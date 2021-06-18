@@ -14,7 +14,7 @@ const { urlencoded } = require('express');
 
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'))
+app.set('views', path.join(__dirname, 'views'));
 
 
 app.use(morgan('dev'));
@@ -24,18 +24,18 @@ app.use(mconn(mysql,{
     password: 'root',
     port:3306,
     database:'tickets'
-},'single'))
+},'single'));
 app.use(urlencoded({extended: false}));
-
-app.use('/',customersRoute);
-app.use('/customers',customersRoute);
-app.use('/users',usersRoute);
-app.use('/usersroles',usersRolesRoute);
-
-
 
 app.use(express.static(path.join(__dirname,'public')));
 
+
+app.use('/customers',customersRoute);
+app.use('/users',usersRoute);
+app.use('/usersroles',usersRolesRoute);
+app.use('/',function(req, res) {
+  res.render('frontpage');
+});
 
 app.listen(app.get('port'), function() {
   console.log('Aplicación ejemplo, escuchando el puerto 3000!');

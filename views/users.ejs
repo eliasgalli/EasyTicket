@@ -38,6 +38,7 @@
               <div class="card-body">
                 <form action="/users/add" method="POST">
                     <div class="form-group">
+                        <input type="text" name="id" id="" class="form-control" placeholder="id" aria-describedby="helpId" readonly value= <%= obj ? obj.id : '' %>>
                         <input type="text" name="last_name" id="" class="form-control" placeholder="Last Name" aria-describedby="helpId" value= <%= obj ? obj.last_name : '' %>>
                         <input type="text" name="first_name" id="" class="form-control" placeholder="First Name" aria-describedby="helpId"value= <%= obj ? obj.first_name : '' %>>
                         <input type="text" name="email" id="" class="form-control" placeholder="Email" aria-describedby="helpId" value= <%= obj ? obj.email : '' %>>

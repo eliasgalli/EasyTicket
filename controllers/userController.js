@@ -1,36 +1,37 @@
+const mysql = require("mysql");
 const controller = {};
 
 controller.list = (req,res) => {
     req.getConnection((err,conn) => {
-        conn.query('SELECT * FROM USERS',(err,usersLST)=> {
+        conn.query('SELECT * FROM USERS',(err,LST)=> {
             if (err) { res.json(err);}
-            const obj = usersLST.find(x => x.id === parseInt(req.params.id));
-            console.log(obj)
             res.render('users',{
-                data: usersLST,
-                obj: obj
+                data: LST,
+                obj: LST.find(x => x.id === parseInt(req.params.id))
             })
         })
     });
 };
 
-controller.add = (req,res) => {
+controller.save = (req,res) => {
     const data = req.body;
-    console.log(data)
     req.getConnection((err,conn) => {
-        conn.query('insert into users set ?',[data], (err,user) => {
-            if (err) { res.json(err);}
-            res.redirect('/users')
+        if (data.id){
+            sql = mysql.format('update users set last_name = ?, first_name = ?, email = ?, phone = ?, password = ? where id = ?',[data.last_name, data.first_name, data.email, data.phone, data.password, data.id]);
+        } else {
+            sql = mysql.format('insert into users set last_name = ?, first_name = ?, email = ?, phone = ?, password = ? ',[data.last_name, data.first_name, data.email, data.phone, data.password]);
+        }
+        conn.query(sql,[], (err,user) => {
+            err ? res.json(err) : res.redirect('/users');
         })
     })
 }
 
 controller.delete = (req,res) => {
-    const {id} = req.params
+    const {id} = req.params;
     req.getConnection((err,conn) => {
         conn.query('delete from users where id = ?',[id], (err,rows) => {
-            if (err) { res.json(err);}
-            res.redirect('/users')
+            err ? res.json(err): res.redirect('/users');
         })
     })
 }

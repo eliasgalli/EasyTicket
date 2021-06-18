@@ -19,7 +19,10 @@
                             <tr>
                                 <td><%= data[i].id  %> </td>
                                 <td><%= data[i].description  %> </td>
-                                <td><a href="customers/delete/<%= data[i].id  %> " class="btn btn-danger">Delete</a> </td>
+                                <td>
+                                    <a href="/customers/delete/<%= data[i].id  %> " class="btn btn-danger">Delete</a>
+                                    <a href="/customers/<%= data[i].id  %> " class="btn btn-info">Edit</a>
+                                </td>
                             </tr>
                             <% }  %>        
                     <% }  %> 
@@ -29,10 +32,11 @@
         <div class="col-md-5">      
           <div class="card">
               <div class="card-body">
-                <form action="customers/add" method="POST">
+                <form action="/customers/add" method="POST">
                     <div class="<div class="form-group">
                         <label for=""></label>
-                        <input type="text" name="description" id="" class="form-control" placeholder="description" aria-describedby="helpId">
+                        <input type="text" name="id" id="" class="form-control" placeholder="id" aria-describedby="helpId" readonly value= <%= obj ? obj.id : '' %>>
+                        <input type="text" name="description" id="" class="form-control" placeholder="description" aria-describedby="helpId" value= <%= obj ? obj.description : '' %>>
                     </div>
                     <button type="submit" class="btn btn-primary" >Save</button>
                 </form>
