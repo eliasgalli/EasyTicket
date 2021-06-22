@@ -27,14 +27,14 @@ controller.list = (req,res) => {
 
 controller.save = (req,res) => {
     const data = req.body;
-        if (data.id){
-            sql = mysql.format('update user_customer set description = ? where id = ?',[data.description, data.id]);
-        } else {
-            sql = mysql.format('insert into user_customer set ?',[data]);
-        }
-        db.query(sql,[], (err,customer) => {
-            err ? res.json(err) : res.redirect('/usersroles');
-        })
+    if (data){
+        db.query('delete from user_customer where user = ? and customer = ? ',[parseInt(data.user), parseInt(data.customer)], (err,customer) => {
+            if (err){res.json(err); }
+            db.query('insert into user_customer set ?',[data], (err,customer) => {
+                err ? res.json(err) : res.redirect('/usersroles');
+            })
+        }) 
+    }
 }
 controller.delete = (req,res) => {
     const {id} = req.params

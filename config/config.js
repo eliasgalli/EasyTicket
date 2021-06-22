@@ -7,7 +7,8 @@ const config = {
     user: env.DB_USER || 'root',
     password: env.DB_PASSWORD || 'root',
     database: env.DB_NAME || 'tickets',
-    port: 3306
+    port: 3306,
+    multipleStatements: true
   },
   listPerPage: env.LIST_PER_PAGE || 10,
 };
