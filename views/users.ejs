@@ -38,11 +38,26 @@
               <div class="card-body">
                 <form action="/users/save" method="POST">
                     <div class="form-group">
-                        <input type="text" name="id" id="" class="form-control" placeholder="id" aria-describedby="helpId" readonly value= <%= obj ? obj.id : '' %>>
-                        <input type="text" name="last_name" id="" class="form-control" placeholder="Last Name" aria-describedby="helpId" value= <%= obj ? obj.last_name : '' %>>
-                        <input type="text" name="first_name" id="" class="form-control" placeholder="First Name" aria-describedby="helpId"value= <%= obj ? obj.first_name : '' %>>
-                        <input type="text" name="email" id="" class="form-control" placeholder="Email" aria-describedby="helpId" value= <%= obj ? obj.email : '' %>>
-                        <input type="text" name="password" id="" class="form-control" placeholder="Password" aria-describedby="helpId" value= <%= obj ? obj.password : '' %>>
+                        <div class="form-floating">
+                            <input type="text" name="id"  id="floatingInput" class="form-control" placeholder="id" aria-describedby="helpId" readonly value= <%= obj ? obj.id : '' %>>
+                            <label for="floatingInput">id</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" name="last_name" id="floatingInput" class="form-control" placeholder="Last Name" aria-describedby="helpId" value= <%= obj ? obj.last_name : '' %>>
+                            <label for="floatingInput">Last Name</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" name="first_name" id="floatingInput" class="form-control" placeholder="First Name" aria-describedby="helpId"value= <%= obj ? obj.first_name : '' %>>
+                            <label for="floatingInput">First Name</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="email" name="email" id="floatingInput" class="form-control" placeholder="Email" aria-describedby="helpId" value= <%= obj ? obj.email : '' %>>
+                            <label for="floatingInput">Email</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="password" name="password" id="floatingInput" class="form-control" placeholder="Password" aria-describedby="helpId" value= <%= obj ? obj.password : '' %>>
+                            <label for="floatingInput">Password</label>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary" >Save</button>
                 </form>
