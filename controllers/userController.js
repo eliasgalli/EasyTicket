@@ -1,4 +1,4 @@
-const mysql = require("mysql");
+const db = require("../config/db");
 const controller = {};
 
 controller.list = (req,res) => {

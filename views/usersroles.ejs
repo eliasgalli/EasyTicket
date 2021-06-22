@@ -22,7 +22,7 @@
                                 <td><%= data[i].last_name  %> </td>
                                 <td><%= data[i].first_name  %> </td>
                                 <td><%= data[i].email  %> </td>
-                                <td><a href="users/delete/<%= data[i].id  %> " class="btn btn-danger">Delete</a> </td>
+                                <td><a href="usersroles/delete/<%= data[i].id  %> " class="btn btn-danger">Delete</a> </td>
                             </tr>
                             <% }  %>        
                     <% }  %> 
@@ -32,7 +32,31 @@
         <div class="col-md-5">      
           <div class="card">
               <div class="card-body">
-                <form action="/users/add" method="POST">
+                <form action="/usersroles/save" method="POST">
+
+                    <select class="selectpicker" data-style="btn-info" name="selectpicker">
+                        <optgroup label="Select Table">
+                            <option name="" value="0">Select Month Year</option>
+                            <% for(var i=0;i<rowsLength;i++){ %>
+                            <% if(i>0){ %>
+                            <% if(rows[i].month_year !== rows[i-1].month_year){ %>
+                            <option name="table<%=i %>"  value="month1"><%= rows[i].month_year %></option>
+                            <% } %>
+                
+                            <% }else{ %>
+                            <option name="table<%=i %>"  value="month2"> <%= rows[i].month_year %></option>
+                            <% } %>
+                            <% } %>
+                        </optgroup>
+                    </select>
+
+
+
+
+
+
+
+
                     <div class="form-group">
                         <input type="text" name="last_name" id="" class="form-control" placeholder="Last Name" aria-describedby="helpId">
                         <input type="text" name="first_name" id="" class="form-control" placeholder="First Name" aria-describedby="helpId">

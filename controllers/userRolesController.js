@@ -11,7 +11,7 @@ controller.list = (req,res) => {
     });
 };
 
-controller.add = (req,res) => {
+controller.save = (req,res) => {
     const data = req.body;
     console.log(data)
     req.getConnection((err,conn) => {

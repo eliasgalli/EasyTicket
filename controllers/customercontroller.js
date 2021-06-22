@@ -1,16 +1,22 @@
-const mysql = require("mysql");
+const db = require("../config/db");
 const controller = {};
 
-controller.list = (req,res) => {
-    req.getConnection((err,conn) => {
-        conn.query('SELECT * FROM CUSTOMERS',(err,LST)=> {
-            if (err) { res.json(err);}
-            res.render('customers',{
-                data: LST,
-                obj: LST.find(x => x.id === parseInt(req.params.id))
-            })
-        })
+
+
+function getCustomers(id, callback) {
+    db.query('SELECT * FROM CUSTOMERS', function(error,results) {
+        callback(error,results);
     });
+}
+
+    
+controller.list = (req,res) => {
+    getCustomers('', (error,LST) => {
+    res.render('customers',{
+        data: LST,
+        obj: LST.find(x => x.id === parseInt(req.params.id))
+            })
+    })
 };
 
 controller.save = (req,res) => {
