@@ -1,0 +1,73 @@
+<%- include ('partials/header') %> 
+<h2>Customers</h2>
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-7">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Identification</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Priority</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    <tr></tr>
+                </thead>
+                <tbody>
+                    <% if(data) { %>
+                        <% for (var i = 0; i < data.length; i++) { %> 
+                            <tr class = "<%- data[i].priority === 1 ? 'table-success' : data[i].priority === 2 ? 'table-warning' : data[i].priority === 2 ? 'table-danger' : '' %>">
+                                <th scope="row"><%= data[i].id  %></th>
+                                <td><%= moment(data[i].creation_date).fromNow();  %> </td>
+                                <td><%= datacustomers.find(x => x.id === data[i].customer).description  %> </td>
+                                <td><%= datastatus.find(x => x.id === data[i].status).description  %> </td>
+                                <td><%= datapriorities.find(x => x.id === data[i].priority).description%> </td>
+                                <td>
+                                    <a href="/tickets/delete/<%= data[i].id  %> " class="btn btn-danger">Delete</a>
+                                    <a href="/tickets/<%= data[i].id  %> " class="btn btn-info">Edit</a>
+                                </td>
+                            </tr>
+                            <% }  %>        
+                    <% }  %> 
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-5">      
+          <div class="card">
+              <div class="card-body">
+                <form action="/customers/save" method="POST">
+                    <div class="form-group">
+                    <div class="form-floating">
+                        <input type="text" name="id" id="floatingInput" class="form-control" placeholder="id" aria-describedby="helpId" readonly value= <%= obj ? obj.id : '' %>>
+                        <label for="floatingInput">Id</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" name="creation_date" id="floatingInput" class="form-control" placeholder="Creation date" aria-describedby="helpId" readonly value= <%= obj ? moment(obj.creation_date).format('YYYY-MM-DDTHH:mm') : '' %>>
+                        <label for="floatingInput">Creation date</label>
+                        </div>
+                    </div>
+                    <select class="form-control" data-style="btn-info" name="customer">
+                        <option value="">Customer</option>
+                        <% for(var i=0;i < datacustomers.length ;i++){ %>
+                            <option <%- obj && obj.customer == datacustomers[i].id ? "selected" : ""%>  value="<%= datacustomers[i].id %>"><%= datacustomers[i].description %></option>
+                        <% } %>    
+                    </select>
+                    <select class="form-control" data-style="btn-info" name="user">
+                        <option value="">User</option>
+                        <% for(var i=0;i < datausers.length ;i++){ %>
+                            <option <%- obj && obj.creation_user == datausers[i].id ? "selected" : ""%> value="<%= datausers[i].id %>" sel ><%= datausers[i].last_name + ', ' + datausers[i].first_name %></option>
+                        <% } %>    
+                    </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" >Save</button>
+                </form>
+              </div>
+          </div>
+        </div>
+    </div>    
+</div>
+
+<%- include ('partials/footer') %> 
