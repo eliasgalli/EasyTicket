@@ -1,10 +1,13 @@
 const mysql = require('mysql2');
 const config = require('./config.js');
+let _db;
 
+function connect(){
+  _db =  mysql.createConnection(config.db);
+}
 
 function query(sql,params, callback) {
-    const connection =  mysql.createConnection(config.db);
-    connection.query(sql, params, function(error, results, fields) {
+    _db.query(sql, params, function(error, results, fields) {
         if (error) {console.error(error);}
         callback(error,results);
     });
@@ -12,5 +15,6 @@ function query(sql,params, callback) {
 
   
   module.exports = {
-    query
+    query,
+    connect
   }

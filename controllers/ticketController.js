@@ -57,9 +57,9 @@ controller.list = (req,res) => {
 controller.save = (req,res) => {
     const data = req.body;
     if (data.id){
-        sql = mysql.format('update users set customer = ?, creation_user = ?, subject = ?, description = ?, priority = ?, type = ? where id = ?',[data.customer, data.creation_user, data.subject, data.description, data.priority, data.type, data.id]);
+        sql = mysql.format('update tickets set customer = ?, creation_user = ?, subject = ?, description = ?, priority = ?, type = ? where id = ?',[data.customer, data.creation_user, data.subject, data.description, data.priority, data.type, data.id]);
     } else {
-        sql = mysql.format('insert into users set customer = ?, creation_user = ?, subject = ?, description = ?, priority = ? , type = ? ',[data.customer, data.creation_user, data.subject, data.description, data.priority, data.type,]);
+        sql = mysql.format('insert into tickets set customer = ?, creation_user = ?, subject = ?, description = ?, priority = ? , type = ? ',[data.customer, data.creation_user, data.subject, data.description, data.priority, data.type,]);
     }
     db.query(sql,[], (err,ticket) => {
         err ? res.json(err) : res.redirect('/tickets');

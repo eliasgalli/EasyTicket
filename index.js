@@ -4,9 +4,6 @@ const morgan = require('morgan');
 const moment = require("moment");
 
 //const mconn = require('express-myconnection');
-
-
-
 const app = express();
 
 const customersRoute = require('./routes/customerRouter');
@@ -15,6 +12,7 @@ const usersRolesRoute = require('./routes/userRolesRouter');
 const ticketsRoute = require('./routes/ticketsRouter');
 const { urlencoded } = require('express');
 
+const db = require("./config/db");
 
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'ejs');
@@ -37,7 +35,7 @@ app.use('/',function(req, res) {
   res.render('frontpage');
 });
 
-
+db.connect();
 
 app.listen(app.get('port'), function() {
   console.log('Aplicación ejemplo, escuchando el puerto 3000!');
