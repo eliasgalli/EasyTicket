@@ -1,9 +1,9 @@
 <%- include ('partials/header') %> 
-<h2>Customers</h2>
+<h2>Tickets</h2>
 
 <div class="container">
     <div class="row mt-5">
-        <div class="col-md-7">
+        <div class="col-md-9">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -19,7 +19,7 @@
                 <tbody>
                     <% if(data) { %>
                         <% for (var i = 0; i < data.length; i++) { %> 
-                            <tr class = "<%- data[i].priority === 1 ? 'table-success' : data[i].priority === 2 ? 'table-warning' : data[i].priority === 3 ? 'table-danger' : '' %>">
+                            <tr class = "<%- data[i].priority === 1 ? 'table-success' : data[i].priority === 2 ? 'table-warning' : data[i].priority === 3 ? 'table-danger' : '' %>" data-href="https://google.com">
                                 <th scope="row"><%= data[i].id  %></th>
                                 <td><%= moment(data[i].creation_date).fromNow();  %> </td>
                                 <td><%= datacustomers.find(x => x.id === data[i].customer).description  %> </td>
@@ -29,6 +29,7 @@
                                 <td>
                                     <a href="/tickets/delete/<%= data[i].id  %> " class="btn btn-danger">Delete</a>
                                     <a href="/tickets/<%= data[i].id  %> " class="btn btn-info">Edit</a>
+                                    <a href="/responses/<%= data[i].id  %> " class="btn btn-info">Responses</a>
                                 </td>
                             </tr>
                             <% }  %>        
@@ -36,7 +37,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-5">      
+        <div class="col-md-3">      
           <div class="card">
               <div class="card-body">
                 <form action="/tickets/save" method="POST">
@@ -81,12 +82,11 @@
                         <% } %>    
                     </select>
                     <div class="form-floating">
-                        <input type="text" name="subject" id="floatingInput" class="form-control" placeholder="Subject" aria-describedby="helpId" value= <%= obj ? obj.subject : '' %>>
+                        <input type="text" name="subject" id="floatingInput" class="form-control" placeholder="Subject" aria-describedby="helpId" value= "<%= obj ? obj.subject : '' %>">
                         <label for="floatingInput">Subject</label>
                     </div>
-                    <div class="form-floating">
-                        <input type="text" name="description" id="floatingInput" class="form-control" placeholder="Description" aria-describedby="helpId" value= <%= obj ? obj.description : '' %>>
-                        <label for="floatingInput">Description</label>
+                    <div class="form-group">
+                        <textarea name="description" id="textarea"class="form-control" placeholder="Description" aria-describedby="helpId" rows = 6 ><%= obj ? obj.description : '' %></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary" >Save</button>
                 </form>

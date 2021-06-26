@@ -1,5 +1,4 @@
 const db = require("../config/db");
-const mysql = require('mysql2');
 const controller = {};
 
 
@@ -23,9 +22,9 @@ controller.list = (req,res) => {
 controller.save = (req,res) => {
     const data = req.body;
     if (data.id){
-        sql = mysql.format('update users set last_name = ?, first_name = ?, email = ?, phone = ?, password = ? where id = ?',[data.last_name, data.first_name, data.email, data.phone, data.password, data.id]);
+        sql = db.format('update users set last_name = ?, first_name = ?, email = ?, phone = ?, password = ? where id = ?',[data.last_name, data.first_name, data.email, data.phone, data.password, data.id]);
     } else {
-        sql = mysql.format('insert into users set last_name = ?, first_name = ?, email = ?, phone = ?, password = ? ',[data.last_name, data.first_name, data.email, data.phone, data.password]);
+        sql = db.format('insert into users set last_name = ?, first_name = ?, email = ?, phone = ?, password = ? ',[data.last_name, data.first_name, data.email, data.phone, data.password]);
     }
     db.query(sql,[], (err,user) => {
         err ? res.json(err) : res.redirect('/users');

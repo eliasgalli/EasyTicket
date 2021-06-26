@@ -13,8 +13,11 @@ function query(sql,params, callback) {
     });
 }
 
-  
+function format(sql, values){
+  return mysql.format(sql,values);
+}  
   module.exports = {
     query,
-    connect
+    connect,
+    format
   }

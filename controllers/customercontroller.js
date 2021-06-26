@@ -1,5 +1,4 @@
 const db = require("../config/db");
-const mysql = require('mysql2');
 const controller = {};
 
 controller.getCustomers = (id, callback) => {
@@ -21,9 +20,9 @@ controller.list = (req,res) => {
 controller.save = (req,res) => {
     const data = req.body;
         if (data.id){
-            sql = mysql.format('update customers set description = ? where id = ?',[data.description, data.id]);
+            sql = db.format('update customers set description = ? where id = ?',[data.description, data.id]);
         } else {
-            sql = mysql.format('insert into customers set description = ? ',[data.description]);
+            sql = db.format('insert into customers set description = ? ',[data.description]);
         }
         db.query(sql,[], (err,customer) => {
             err ? res.json(err) : res.redirect('/customers');

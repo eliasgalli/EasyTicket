@@ -1,5 +1,4 @@
 const db = require("../config/db");
-const mysql = require('mysql2');
 const customers = require('./customercontroller');
 const users = require('./userController');
 const roles = require('./roleController');

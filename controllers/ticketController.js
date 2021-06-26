@@ -1,5 +1,4 @@
 const db = require("../config/db");
-const mysql = require('mysql2');
 const customers = require('./customercontroller');
 const users = require('./userController');
 const controller = {};
@@ -7,7 +6,7 @@ const controller = {};
 
 
 controller.getTickets = (id, callback) => {
-    db.query('SELECT * FROM tickets',[], function(error,results) {
+    db.query('SELECT * FROM tickets',id, function(error,results) {
         callback(error,results);
     });
 }
@@ -57,9 +56,9 @@ controller.list = (req,res) => {
 controller.save = (req,res) => {
     const data = req.body;
     if (data.id){
-        sql = mysql.format('update tickets set customer = ?, creation_user = ?, subject = ?, description = ?, priority = ?, type = ? where id = ?',[data.customer, data.creation_user, data.subject, data.description, data.priority, data.type, data.id]);
+        sql = db.format('update tickets set customer = ?, creation_user = ?, subject = ?, description = ?, priority = ?, type = ? where id = ?',[data.customer, data.creation_user, data.subject, data.description, data.priority, data.type, data.id]);
     } else {
-        sql = mysql.format('insert into tickets set customer = ?, creation_user = ?, subject = ?, description = ?, priority = ? , type = ? ',[data.customer, data.creation_user, data.subject, data.description, data.priority, data.type,]);
+        sql = db.format('insert into tickets set customer = ?, creation_user = ?, subject = ?, description = ?, priority = ? , type = ?, status = ? ',[data.customer, data.creation_user, data.subject, data.description, data.priority, data.type, data.status]);
     }
     db.query(sql,[], (err,ticket) => {
         err ? res.json(err) : res.redirect('/tickets');
