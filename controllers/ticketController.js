@@ -1,5 +1,5 @@
 const db = require("../config/db");
-const customers = require('./customercontroller');
+const customers = require('./customerController');
 const users = require('./userController');
 const controller = {};
 
@@ -36,9 +36,10 @@ controller.list = (req,res) => {
                 controller.getTypes('',(err,LSTTypes)=> {
                     controller.getPriorities('',(err,LSTPriorities)=> {
                         controller.getTickets('',(err,LST)=> {
+                            let obj = (LST) ? LST.find(x => x.id === parseInt(req.params.id)):undefined;
                             res.render('tickets',{
                                 data: LST,
-                                obj: LST.find(x => x.id === parseInt(req.params.id)),
+                                obj,
                                 datacustomers:LSTCustomers,
                                 datausers:LSTUsers,
                                 datastatus:LSTStatus,

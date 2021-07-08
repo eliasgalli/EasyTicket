@@ -11,6 +11,7 @@ const usersRoute = require('./routes/userRouter');
 const usersRolesRoute = require('./routes/userRolesRouter');
 const ticketsRoute = require('./routes/ticketsRouter');
 const responsesRoute = require('./routes/responsesRouter');
+const rolesRoute = require('./routes/rolesRouter');
 const { urlencoded } = require('express');
 
 const db = require("./config/db");
@@ -30,12 +31,17 @@ app.use((req, res, next)=>{
 });
 app.use('/customers',customersRoute);
 app.use('/users',usersRoute);
+app.use('/roles',rolesRoute);
 app.use('/usersroles',usersRolesRoute);
 app.use('/tickets',ticketsRoute);
 app.use('/responses',responsesRoute);
+app.use('/login',function(req, res) {
+  res.render('login');
+});
 app.use('/',function(req, res) {
   res.render('frontpage');
 });
+
 
 db.connect();
 

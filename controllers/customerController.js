@@ -2,7 +2,7 @@ const db = require("../config/db");
 const controller = {};
 
 controller.getCustomers = (id, callback) => {
-    db.query('SELECT * FROM CUSTOMERS',[], function(error,results) {
+    db.query('SELECT * FROM customers',[], function(error,results) {
         callback(error,results);
     });
 }
@@ -10,9 +10,10 @@ controller.getCustomers = (id, callback) => {
     
 controller.list = (req,res) => {
     controller.getCustomers('', (error,LST) => {
+        let obj = (LST) ? LST.find(x => x.id === parseInt(req.params.id)):undefined;
         res.render('customers',{
             data: LST,
-            obj: LST.find(x => x.id === parseInt(req.params.id))
+            obj
         })
     })
 };

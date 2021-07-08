@@ -1,5 +1,5 @@
 const db = require("../config/db");
-const customers = require('./customercontroller');
+const customers = require('./customerController');
 const users = require('./userController');
 const roles = require('./roleController');
 const controller = {};
@@ -10,10 +10,10 @@ controller.list = (req,res) => {
             roles.getRoles('',(error,LSTRoles) => {
                 db.query('SELECT *, roles.description as rolesdsc, customers.description as customerdsc FROM user_customer left join users on user = users.id left join customers on Customer = customers.id left join roles on Role = roles.id;',(err,usersLST)=> {
                     if (err) { res.json(err);}
-                    console.log(LSTCustomers);
+                    let obj = (usersLST) ? usersLST.find(x => x.user === parseInt(req.params.user) && x.customer === parseInt(req.params.customer)):undefined;
                     res.render('usersroles',{
                         data: usersLST,
-                        obj: usersLST.find(x => x.user === parseInt(req.params.user) && x.customer === parseInt(req.params.customer)),
+                        obj,
                         datacustomers:LSTCustomers,
                         dataroles: LSTRoles,
                         datausers:LSTUsers

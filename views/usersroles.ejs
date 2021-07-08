@@ -39,19 +39,21 @@
                         <select class="form-control" data-style="btn-info" name="customer">
                             <option value="">Customer</option>
                             <% for(var i=0;i < datacustomers.length ;i++){ %>
-                                <option <%- obj && obj.customer == datacustomers[i].id ? "selected" : ""%>  value="<%= datacustomers[i].id %>"><%= datacustomers[i].description %></option>
+                                <option <%- obj && obj.customer === datacustomers[i].id ? "selected" : ""%>  value="<%= datacustomers[i].id %>"><%= datacustomers[i].description %></option>
                             <% } %>    
                         </select><br>
                         <select class="form-control" data-style="btn-info" name="user">
                             <option value="">User</option>
-                            <% for(var i=0;i < datausers.length ;i++){ %>
-                                <option <%- obj && obj.user == datausers[i].id ? "selected" : ""%> value="<%= datausers[i].id %>" sel ><%= datausers[i].last_name + ', ' + datausers[i].first_name %></option>
+                            <% if (datausers) {%>
+                                <% for(var i=0;i < datausers.length ;i++){ %>
+                                    <option <%- obj && obj.user === datausers[i].id ? "selected" : ""%> value="<%= datausers[i].id %>" sel ><%= datausers[i].last_name + ', ' + datausers[i].first_name %></option>
+                                <% } %>    
                             <% } %>    
                         </select><br>
                         <select class="form-control" data-style="btn-info" name="role">
                             <option value="">Role</option>
                             <% for(var i=0;i < dataroles.length ;i++){ %>
-                                <option <%- obj && obj.role == dataroles[i].id ? "selected" : ""%> value="<%= dataroles[i].id %>"><%= dataroles[i].description %></option>
+                                <option <%- obj && obj.role === dataroles[i].id ? "selected" : ""%> value="<%= dataroles[i].id %>"><%= dataroles[i].description %></option>
                             <% } %>    
                         </select><br>
                     </div>

@@ -4,7 +4,7 @@ const controller = {};
 
 
 controller.getUsers = (id, callback) => {
-    db.query('SELECT * FROM USERS',[], function(error,results) {
+    db.query('SELECT * FROM users',[], function(error,results) {
         callback(error,results);
     });
 }
@@ -12,9 +12,10 @@ controller.getUsers = (id, callback) => {
 
 controller.list = (req,res) => {
     controller.getUsers('',(err,LST)=> {
+        let obj = (LST) ? LST.find(x => x.id === parseInt(req.params.id)):undefined;
         res.render('users',{
             data: LST,
-            obj: LST.find(x => x.id === parseInt(req.params.id))
+            obj
         })
     })
 };
@@ -36,6 +37,10 @@ controller.delete = (req,res) => {
     db.query('delete from users where id = ?',[id], (err,rows) => {
         err ? res.json(err): res.redirect('/users');
     })
+}
+controller.login = (req,res) => {
+    const data = req.body;
+    res.redirect('/tickets')
 }
 
 module.exports = controller;

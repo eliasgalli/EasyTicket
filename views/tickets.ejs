@@ -53,14 +53,18 @@
                     </div>
                     <select class="form-control" data-style="btn-info" name="customer">
                         <option value="">Customer</option>
-                        <% for(var i=0;i < datacustomers.length ;i++){ %>
-                            <option <%- obj && obj.customer == datacustomers[i].id ? "selected" : ""%>  value="<%= datacustomers[i].id %>"><%= datacustomers[i].description %></option>
-                        <% } %>    
+                        <% if (datacustomers) { %>
+                            <% for(var i=0;i < datacustomers.length ;i++){ %>
+                                <option <%- obj && obj.customer == datacustomers[i].id ? "selected" : ""%>  value="<%= datacustomers[i].id %>"><%= datacustomers[i].description %></option>
+                            <% } %>    
+                        <% } %>  
                     </select>
                     <select class="form-control" data-style="btn-info" name="creation_user">
                         <option value="">User</option>
-                        <% for(var i=0;i < datausers.length ;i++){ %>
-                            <option <%- obj && obj.creation_user == datausers[i].id ? "selected" : ""%> value="<%= datausers[i].id %>" sel ><%= datausers[i].last_name + ', ' + datausers[i].first_name %></option>
+                        <% if (datausers) { %>
+                            <% for(var i=0;i < datausers.length ;i++){ %>
+                                <option <%- obj && obj.creation_user == datausers[i].id ? "selected" : ""%> value="<%= datausers[i].id %>" sel ><%= datausers[i].last_name + ', ' + datausers[i].first_name %></option>
+                            <% } %>    
                         <% } %>    
                     </select>
                     <select class="form-control" data-style="btn-info" name="priority">

@@ -17,12 +17,13 @@ controller.list = (req,res) => {
     tickets.getTickets(ticket, (error,LSTTicket) => {
         users.getUsers('', (error,LSTUsers) => { 
             controller.getResponses(ticket,(err,LST)=> {
+                let obj = (LST) ? LST.find(x => x.id === parseInt(req.params.id)):undefined;
                 res.render('responses',{
                     data: LST,
                     ticket_id: ticket,
                     ticket:LSTTicket,
                     datausers:LSTUsers,
-                    obj: LST.find(x => x.id === parseInt(req.params.id))
+                    obj
                 })
             })
         })

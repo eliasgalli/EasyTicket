@@ -1,0 +1,54 @@
+<%- include ('partials/header') %> 
+<h2>Roles</h2>
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-7">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Identification</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr></tr>
+                </thead>
+                <tbody>
+                    <% if(data) { %>
+                        <% for (var i = 0; i < data.length; i++) { %> 
+                            <tr>
+                                <td><%= data[i].id  %> </td>
+                                <td><%= data[i].description  %> </td>
+                                <td>
+                                    <a href="/customers/delete/<%= data[i].id  %> " class="btn btn-danger">Delete</a>
+                                    <a href="/customers/<%= data[i].id  %> " class="btn btn-info">Edit</a>
+                                </td>
+                            </tr>
+                            <% }  %>        
+                    <% }  %> 
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-5">      
+          <div class="card">
+              <div class="card-body">
+                <form action="/roles/save" method="POST">
+                    <div class="form-group">
+                    <div class="form-floating">
+                        <input type="text" name="id" id="floatingInput" class="form-control" placeholder="id" aria-describedby="helpId" readonly value= <%= obj ? obj.id : '' %>>
+                        <label for="floatingInput">id</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" name="description" id="floatingInput" class="form-control" placeholder="description" aria-describedby="helpDescription" value= "<%= obj ? obj.description : '' %>">
+                        <label id = "helpDescription" for="floatingInput">Description</label>
+                    </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" >Save</button>
+                </form>
+              </div>
+          </div>
+        </div>
+    </div>    
+</div>
+
+<%- include ('partials/footer') %> 
