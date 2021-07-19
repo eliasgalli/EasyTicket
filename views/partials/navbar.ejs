@@ -22,6 +22,8 @@
                 <a class="nav-link" href="/tickets">Tickets</a>
               </li>
             </ul>   
-        </div>  
+          </div> 
+          <%- (locals.user) ? `Welcome ${locals.user.name}!  `: "<a class='nav-link' href='/login'>Log In</a>"%> <a class='nav-item' href='/logout'>Log Out</a>
+          
     </div>
 </nav>

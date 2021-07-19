@@ -1,4 +1,6 @@
 const db = require("../config/db");
+const bcryptjs = require('bcryptjs');
+const passport = require('passport');
 const controller = {};
 
 
@@ -37,10 +39,6 @@ controller.delete = (req,res) => {
     db.query('delete from users where id = ?',[id], (err,rows) => {
         err ? res.json(err): res.redirect('/users');
     })
-}
-controller.login = (req,res) => {
-    const data = req.body;
-    res.redirect('/tickets')
 }
 
 module.exports = controller;
