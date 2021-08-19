@@ -36,10 +36,11 @@ controller.list = (req,res) => {
                 controller.getTypes('',(err,LSTTypes)=> {
                     controller.getPriorities('',(err,LSTPriorities)=> {
                         controller.getTickets('',(err,LST)=> {
-                            let obj = (LST) ? LST.find(x => x.id === parseInt(req.params.id)):undefined;
+                            let objTicket = (LST) ? LST.find(x => x.id === parseInt(req.params.id)):undefined;
                             res.render('tickets',{
+                                readonly: true,
                                 data: LST,
-                                obj,
+                                objTicket,
                                 datacustomers:LSTCustomers,
                                 datausers:LSTUsers,
                                 datastatus:LSTStatus,

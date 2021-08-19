@@ -1,6 +1,5 @@
 <%- include ('partials/header') %> 
 <h2>Roles</h2>
-
 <div class="container">
     <div class="row mt-5">
         <div class="col-md-7">
@@ -40,7 +39,7 @@
                     </div>
                     <div class="form-floating">
                         <input type="text" name="description" id="floatingInput" class="form-control" placeholder="description" aria-describedby="helpDescription" value= "<%= obj ? obj.description : '' %>">
-                        <label id = "helpDescription" for="floatingInput">Description</label>
+                        <label id = "floatingInput" >Description</label>
                     </div>
                     </div>
                     <button type="submit" class="btn btn-primary" >Save</button>

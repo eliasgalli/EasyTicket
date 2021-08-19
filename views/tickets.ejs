@@ -19,7 +19,7 @@
                 <tbody>
                     <% if(data) { %>
                         <% for (var i = 0; i < data.length; i++) { %> 
-                            <tr class = "<%- data[i].priority === 1 ? 'table-success' : data[i].priority === 2 ? 'table-warning' : data[i].priority === 3 ? 'table-danger' : '' %>" data-href="https://google.com">
+                            <tr class = "<%- data[i].priority === 3 ? 'table-success' : data[i].priority === 2 ? 'table-warning' : data[i].priority === 1 ? 'table-danger' : '' %>" data-href="https://google.com">
                                 <th scope="row"><%= data[i].id  %></th>
                                 <td><%= moment(data[i].creation_date).fromNow();  %> </td>
                                 <td><%= datacustomers.find(x => x.id === data[i].customer).description  %> </td>
@@ -38,64 +38,7 @@
             </table>
         </div>
         <div class="col-md-3">      
-          <div class="card">
-              <div class="card-body">
-                <form action="/tickets/save" method="POST">
-                    <div class="form-group">
-                    <div class="form-floating">
-                        <input type="text" name="id" id="floatingInput" class="form-control" placeholder="id" aria-describedby="helpId" readonly value= <%= obj ? obj.id : '' %>>
-                        <label for="floatingInput">Id</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="text" name="creation_date" id="floatingInput" class="form-control" placeholder="Creation date" aria-describedby="helpId" readonly value= <%= obj ? moment(obj.creation_date).format('YYYY-MM-DDTHH:mm') : '' %>>
-                        <label for="floatingInput">Creation date</label>
-                        </div>
-                    </div>
-                    <select class="form-control" data-style="btn-info" name="customer">
-                        <option value="">Customer</option>
-                        <% if (datacustomers) { %>
-                            <% for(var i=0;i < datacustomers.length ;i++){ %>
-                                <option <%- obj && obj.customer == datacustomers[i].id ? "selected" : ""%>  value="<%= datacustomers[i].id %>"><%= datacustomers[i].description %></option>
-                            <% } %>    
-                        <% } %>  
-                    </select>
-                    <select class="form-control" data-style="btn-info" name="creation_user">
-                        <option value="">User</option>
-                        <% if (datausers) { %>
-                            <% for(var i=0;i < datausers.length ;i++){ %>
-                                <option <%- obj && obj.creation_user == datausers[i].id ? "selected" : ""%> value="<%= datausers[i].id %>" sel ><%= datausers[i].last_name + ', ' + datausers[i].first_name %></option>
-                            <% } %>    
-                        <% } %>    
-                    </select>
-                    <select class="form-control" data-style="btn-info" name="priority">
-                        <option value="">Priority</option>
-                        <% for(var i=0;i < datapriorities.length ;i++){ %>
-                            <option <%- obj && obj.priority == datapriorities[i].id ? "selected" : ""%> value="<%= datapriorities[i].id %>" sel ><%= datapriorities[i].description %></option>
-                        <% } %>    
-                    </select>
-                    <select class="form-control" data-style="btn-info" name="status">
-                        <option value="">Status</option>
-                        <% for(var i=0;i < datastatus.length ;i++){ %>
-                            <option <%- obj && obj.status == datastatus[i].id ? "selected" : ""%> value="<%= datastatus[i].id %>" sel ><%= datastatus[i].description %></option>
-                        <% } %>    
-                    </select>
-                    <select class="form-control" data-style="btn-info" name="type">
-                        <option value="">Type</option>
-                        <% for(var i=0;i < datatypes.length ;i++){ %>
-                            <option <%- obj && obj.type == datatypes[i].id ? "selected" : ""%> value="<%= datatypes[i].id %>" sel ><%= datatypes[i].description %></option>
-                        <% } %>    
-                    </select>
-                    <div class="form-floating">
-                        <input type="text" name="subject" id="floatingInput" class="form-control" placeholder="Subject" aria-describedby="helpId" value= "<%= obj ? obj.subject : '' %>">
-                        <label for="floatingInput">Subject</label>
-                    </div>
-                    <div class="form-group">
-                        <textarea name="description" id="textarea"class="form-control" placeholder="Description" aria-describedby="helpId" rows = 6 ><%= obj ? obj.description : '' %></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" >Save</button>
-                </form>
-              </div>
-          </div>
+            <%- include ('ticketdetails') %> 
         </div>
     </div>    
 </div>

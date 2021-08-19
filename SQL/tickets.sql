@@ -106,3 +106,8 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
+
+
+INSERT INTO `tickets`.`ticket_priority` (`description`) VALUES ('High');
+INSERT INTO `tickets`.`ticket_priority` (`description`) VALUES ('Medium');
+INSERT INTO `tickets`.`ticket_priority` (`description`) VALUES ('Low');

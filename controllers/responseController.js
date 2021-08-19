@@ -1,6 +1,7 @@
 const db = require("../config/db");
 const tickets = require('./ticketController');
 const users = require('./userController');
+const customers = require('./customerController');
 const controller = {};
 
 
@@ -14,17 +15,29 @@ controller.getResponses = (id, callback) => {
 
 controller.list = (req,res) => {
     const ticket = req.params.ticketId
-    tickets.getTickets(ticket, (error,LSTTicket) => {
-        users.getUsers('', (error,LSTUsers) => { 
-            controller.getResponses(ticket,(err,LST)=> {
-                let obj = (LST) ? LST.find(x => x.id === parseInt(req.params.id)):undefined;
-                res.render('responses',{
-                    data: LST,
-                    ticket_id: ticket,
-                    ticket:LSTTicket,
-                    datausers:LSTUsers,
-                    obj
-                })
+    customers.getCustomers('', (error,LSTCustomers) => {
+        tickets.getPriorities('',(err,LSTPriorities)=> {
+            tickets.getStatus('',(err,LSTStatus)=> {
+                tickets.getTypes('',(err,LSTTypes)=> {
+                    tickets.getTickets(ticket, (error,LSTTicket) => {
+                        users.getUsers('', (error,LSTUsers) => { 
+                            controller.getResponses(ticket,(err,LST)=> {
+                                let obj = (LST) ? LST.find(x => x.id === parseInt(req.params.id)):undefined;
+                                let objTicket = (LSTTicket) ? LSTTicket.find(x => x.id === parseInt(ticket)):undefined;
+                                res.render('responses',{
+                                    data: LST,
+                                    objTicket,
+                                    datausers:LSTUsers,
+                                    datacustomers:LSTCustomers,
+                                    datapriorities: LSTPriorities,
+                                    datastatus:LSTStatus,
+                                    datatypes:LSTTypes,
+                                    obj
+                                })
+                            })
+                        })
+                    })
+                })    
             })
         })
     })

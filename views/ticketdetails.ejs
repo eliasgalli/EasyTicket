@@ -1,0 +1,58 @@
+<div class="card">
+    <div class="card-body">
+      <form action="/tickets/save" method="POST">
+          <div class="form-group">
+          <div class="form-floating">
+              <input type="text" name="id" id="floatingInput" class="form-control" placeholder="id" aria-describedby="helpId" readonly value= <%= objTicket ? objTicket.id : '' %>>
+              <label for="floatingInput">Id</label>
+          </div>
+          <div class="form-floating">
+              <input type="text" name="creation_date" id="floatingInput" class="form-control" placeholder="Creation date" aria-describedby="helpId" readonly value= <%= objTicket ? moment(objTicket.creation_date).format('YYYY-MM-DDTHH:mm') : '' %>>
+              <label for="floatingInput">Creation date</label>
+              </div>
+          </div>
+          <select class="form-control" data-style="btn-info" name="customer">
+              <option value="">Customer</option>
+              <% if (datacustomers) { %>
+                  <% for(var i=0;i < datacustomers.length ;i++){ %>
+                      <option <%- objTicket && objTicket.customer == datacustomers[i].id ? "selected" : ""%>  value="<%= datacustomers[i].id %>"><%= datacustomers[i].description %></option>
+                  <% } %>    
+              <% } %>  
+          </select>
+          <select class="form-control" data-style="btn-info" name="creation_user">
+              <option value="">User</option>
+              <% if (datausers) { %>
+                  <% for(var i=0;i < datausers.length ;i++){ %>
+                      <option <%- objTicket && objTicket.creation_user == datausers[i].id ? "selected" : ""%> value="<%= datausers[i].id %>" sel ><%= datausers[i].last_name + ', ' + datausers[i].first_name %></option>
+                  <% } %>    
+              <% } %>    
+          </select>
+          <select class="form-control" data-style="btn-info" name="priority">
+              <option value="">Priority</option>
+              <% for(var i=0;i < datapriorities.length ;i++){ %>
+                  <option <%- objTicket && objTicket.priority == datapriorities[i].id ? "selected" : ""%> value="<%= datapriorities[i].id %>" sel ><%= datapriorities[i].description %></option>
+              <% } %>    
+          </select>
+          <select class="form-control" data-style="btn-info" name="status">
+              <option value="">Status</option>
+              <% for(var i=0;i < datastatus.length ;i++){ %>
+                  <option <%- objTicket && objTicket.status == datastatus[i].id ? "selected" : ""%> value="<%= datastatus[i].id %>" sel ><%= datastatus[i].description %></option>
+              <% } %>    
+          </select>
+          <select class="form-control" data-style="btn-info" name="type">
+              <option value="">Type</option>
+              <% for(var i=0;i < datatypes.length ;i++){ %>
+                  <option <%- objTicket && objTicket.type == datatypes[i].id ? "selected" : ""%> value="<%= datatypes[i].id %>" sel ><%= datatypes[i].description %></option>
+              <% } %>    
+          </select>
+          <div class="form-floating">
+              <input type="text" name="subject" id="floatingInput" class="form-control" placeholder="Subject" aria-describedby="helpId" value= "<%= objTicket ? objTicket.subject : '' %>">
+              <label for="floatingInput">Subject</label>
+          </div>
+          <div class="form-group">
+              <textarea name="description" id="textarea"class="form-control" placeholder="Description" aria-describedby="helpId" rows = 6 ><%= objTicket ? objTicket.description : '' %></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" >Save</button>
+      </form>
+    </div>
+</div>
